@@ -6,7 +6,9 @@ import time
 #2.Definir o caminho da imagem
 caminho_base = "imagens-teste/"
 for caminho in os.listdir(caminho_base):
-    arquivo = caminho
+    arquivo = caminho.lower()
+    if not arquivo.endswith((".png", ".jpg")):
+        continue
     caminho_imagem = os.path.join(caminho_base, caminho)
 
     #3. Guarda a imagem
