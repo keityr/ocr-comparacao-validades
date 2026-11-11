@@ -25,11 +25,15 @@ for caminho in os.listdir(caminho_base):
 
     # 5. Montar os dados da requisição (um dicionário)
     dados = {
-        "model": "glm-ocr",              # qual modelo usar
-        "prompt": "Text Recognition:",   # a instrução
-        "images": [imagem_base64],       # lista com a imagem em base64
-        "stream": False                  # resposta inteira de uma vez
+        "model": "glm-ocr",
+        "prompt": "Text Recognition:",
+        "images": [imagem_base64],
+        "stream": False,
+        "options": {
+            "num_ctx": 8192
+        }
     }
+
 
     # 6. Enviar a requisição (e cronometrar)
     inicio = time.time()
@@ -49,3 +53,5 @@ for caminho in os.listdir(caminho_base):
         print(f"Imagem: {caminho_imagem}")
         print(f"Retorno do GLM-OCR:\n{texto}")
         print(f"Tempo de resposta do GLM-OCR: {fim - inicio:.2f} segundos")
+        print(f"Motivo da parada: {resultado['done_reason']}")
+        print(f"Tokens gerados: {resultado['eval_count']}")
